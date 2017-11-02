@@ -22,33 +22,12 @@ public class classy {
 		public int compareTo(Person o) {
 			
 			int i;
-			for(i = 0; i < Math.min(this.c.length(), o.c.length()); i++) {
+			for(i = 0; i < 10; i++) {
 				if(this.c.charAt(i) > o.c.charAt(i)) {
 					return 1;
 				}
 				else if(this.c.charAt(i) < o.c.charAt(i)) {
 					return -1;
-				}
-			}
-			
-			if(this.c.length() > o.c.length()) {
-				for(int j = i + 1; j < this.c.length(); j++) {
-					if(this.c.charAt(j) == LOWER) {
-						return -1;
-					}
-					else if(this.c.charAt(j) == UPPER) {
-						return 1;
-					}
-				}
-			}
-			else {
-				for(int j = i + 1; j < o.c.length(); j++) {
-					if(o.c.charAt(j) == LOWER) {
-						return 1;
-					}
-					else if(o.c.charAt(j) == UPPER) {
-						return -1;
-					}
 				}
 			}
 			
@@ -76,6 +55,12 @@ public class classy {
 				}
 			}
 			
+			sb.reverse();
+			
+			while(sb.length() < 10) {
+				sb.append(MIDDLE);
+			}
+			
 			return sb.toString();
 		}
 		
@@ -92,13 +77,15 @@ public class classy {
 			Person[] people = new Person[n];
 			
 			for(int j = 0; j < n; j++) {
-				StringTokenizer st = new StringTokenizer(br.readLine());
+				StringTokenizer st = new StringTokenizer(br.readLine(), ": ");
 				String name = st.nextToken();
 				String c = st.nextToken();
 				
+				if(c.equals("class")) c = "middle";
+				
 				people[j] = new Person(name, Person.convert(c));
 			}
-			
+
 			Arrays.sort(people);
 			
 			for(int j = n - 1; j >= 0; j--) {
